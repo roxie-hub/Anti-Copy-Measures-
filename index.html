@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交通事故處理綜合指南與內容保護範例</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Chosen Palette: Calm Neutral Harmony (Beige, Deep Gray, Soft Grey-Blue, Muted Blue-Green) -->
+    <style>
+        /* Define main color variables */
+        :root {
+            --brand: #2E6C71;   /* 柔和藍綠 (Accent main) */
+            --ink: #3C3633;     /* 深灰棕 (Deep Gray Text) */
+            --paper: #F8F7F4;   /* 淺米色 (Background Cream) */
+            --soft-blue: #E0E7E9; /* 淺灰藍色 (Primary soft background) */
+            --red-warning: #dc2626; /* Tailwind red-600 */
+            --green-success: #22c55e; /* Tailwind green-500 */
+        }
+
+        /* Base styles from previous version, adapted to new variables */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--paper);
+            color: var(--ink);
+            padding-top: 95px; /* Adjusted for fixed header height */
+        }
+        .text-deep-gray { color: var(--ink); } /* Use ink variable */
+        .text-medium-gray { color: #555555; } /* Retain original medium gray if distinct */
+        .brand { color: var(--brand); } /* Use brand variable for accent text/icon */
+        .bg-brand { background-color: var(--brand); } /* Use brand variable for accent background */
+        .border-brand { border-color: var(--brand); } /* Use brand variable for accent border */
+        .bg-soft-blue { background-color: var(--soft-blue); } /* Use soft blue variable */
+        .shadow-calm { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .card { background: #fff; border: 1px solid rgba(46,108,113,.12); box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+
+
+        /* Fixed Header Container with Copyright and Contact Info and Navigation */
+        .fixed-header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--brand);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding-bottom: 0;
+        }
+        .copyright-notice {
+            text-align: left;
+            color: #FFFFF0;
+            font-size: 0.7rem;
+            padding: 4px 16px 2px 16px;
+            width: 100%;
+            background-color: var(--brand);
+        }
+        .contact-info-top {
+            text-align: center;
+            color: white;
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+        .contact-info-top p {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .contact-info-top .name-phone {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .step-icon {
+            font-size: 2xl;
+            width: 2rem;
+            /* color: var(--brand);  移除或覆蓋此處的顏色設定 */
+        }
+
+        /* Updated styles for navigation buttons */
+        .fixed-nav button {
+            background-color: var(--soft-blue);
+            color: var(--brand);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid var(--brand);
+            font-size: 0.8rem;
+        }
+        .fixed-nav button:hover {
+            background-color: var(--brand);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .fixed-nav .flex-wrap {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .fixed-nav button .fas {
+            font-size: 0.9rem;
+            margin-right: 0.25rem;
+        }
+
+        /* Adjust button width for smaller screens to ensure they fit */
+        @media (max-width: 767px) {
+            .fixed-nav button {
+                flex-shrink: 0;
+                width: calc(33.33% - 0.75rem);
+                text-align: center;
+                padding: 0.5rem 0.25rem;
+            }
+            .fixed-nav .flex-wrap {
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+            .contact-info-top p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Adjustments for the main H1 title */
+        header h1 {
+            word-break: keep-all;
+            white-space: normal;
+            line-height: 1.2;
+            font-size: 2.5rem;
+            margin-top: 0;
+        }
+        @media (max-width: 767px) {
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ===== Accessible Accordion Styles (from ChatGPT code) ===== */
+        .acc-item { border-bottom: 1px solid rgba(46,108,113,.15); }
+        .acc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 1.25rem;
+            gap: .75rem; /* Reduced gap for closer icon */
+            cursor: pointer; /* Add cursor pointer for better UX */
+            background-color: #fff; /* Ensure header has a background */
+            border-radius: 0.5rem 0.5rem 0 0; /* Rounded top corners */
+        }
+        .acc-item:last-child .acc-header {
+            border-bottom: none; /* Remove bottom border for last item header if it's the only one */
+            border-radius: 0.5rem; /* Full rounded corners for last item if closed */
+        }
+        .acc-item[data-open="true"] .acc-header {
+            border-bottom: 1px solid rgba(46,108,113,.15); /* Keep border if open */
+            border-radius: 0.5rem 0.5rem 0 0; /* Keep top rounded, bottom square */
+        }
+        /* Rotate chevron when open */
+        .acc-item[data-open="true"] .acc-chevron {
+            transform: rotate(180deg);
+        }
+
+
+        .acc-header:hover { background-color: #f9fafb; }
+        .acc-title { font-weight: 700; }
+        .acc-chevron { transition: transform .25s ease; }
+        .acc-panel { overflow: hidden; block-size: 0; }
+        /* acc-panel-inner handles all internal padding now */
+        .acc-panel-inner { padding: 1rem 1.25rem; }
+
+        /* Custom width for police QA accordion items */
+        #policeQaAccordion .acc-item {
+            width: 100%; /* Make Q&A items fill available width */
+        }
+        /* Ensure inner content of Q&A also respects general text flow */
+        #policeQaAccordion .acc-panel-inner ul {
+            padding-left: 1.5rem; /* Add some padding for list items */
+        }
+        #policeQaAccordion .acc-panel-inner p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Reduced motion respect user preference */
+        @media (prefers-reduced-motion: reduce){
+            .acc-panel{ transition: none !important; }
+            .acc-chevron{ transition: none !important; }
+        }
+
+        /* For SVG Text */
+        .svg-text-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .svg-text-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="bg-paper text-ink">
+
+    <!-- Fixed Header Container with Copyright and Contact Info and Navigation -->
+    <div class="fixed-header-container">
+        <!-- Copyright Notice at the very top -->
+        <div class="copyright-notice">
+            【版權所有 &copy; 2025 菁 RoxieStudio. 未經授權請勿複製、轉載、引用。】
+        </div>
+        <div class="contact-info-top">
+            <p>諮詢專線：<span class="name-phone">富邦人壽/產險-潘姿菁 0923-660817</span></p>
+            <p>富邦產險服務電話: 0800-009888</p>
+        </div>
+        <div class="fixed-nav bg-brand w-full py-3">
+            <div class="container mx-auto px-4 flex flex-wrap justify-center md:space-x-8">
+                <button onclick="scrollToSection('事故現場處理')">
+                    <i class="fas fa-car-crash"></i>現場處理
+                </button>
+                <button onclick="scrollToSection('筆錄應對核心策略')">
+                    <i class="fas fa-clipboard-list"></i>筆錄應對
+                </button>
+                <button onclick="scrollToSection('權益與文件處理')">
+                    <i class="fas fa-balance-scale"></i>權益與文件
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+
+        <header class="text-center mb-8 md:mb-12 pt-8">
+            <h1 class="text-3xl md:text-4xl font-bold brand mb-2">交通事故處理綜合指南與筆錄應對</h1>
+            <!-- Original text paragraph will be replaced by SVG via JavaScript -->
+            <div id="intro-text-svg-container" class="svg-text-container">
+                <!-- SVG will be injected here -->
+            </div>
+        </header>
+
+        <main class="bg-white rounded-xl shadow-calm overflow-hidden divide-y divide-brand/10">
+            <!-- 事故現場處理區塊 -->
+            <section id="事故現場處理" class="p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6 brand">第一部分：事故現場緊急處置與安全SOP</h2>
+                <p class="text-medium-gray mb-8">車禍發生後的第一個小時，是確保人身安全、保全證據並釐清責任的黃金時間。本章將核心處理步驟濃縮為「放、撥、劃、移、等」五字口訣，旨在提供一套直觀、可操作的應變流程，幫助你即使在驚慌失措中，也能有條不紊地處理事故。</p>
+                <div id="scene-handling-accordion-container" class="space-y-4">
+                    <!-- Scene handling accordion items will be generated by JS -->
+                </div>
+            </section>
+
+            <!-- 筆錄應對區塊 -->
+            <section id="筆錄應對核心策略" class="p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6 brand">第二部分：筆錄應對核心策略與後續指南</h2>
+                <p class="text-medium-gray mb-8">警方筆錄是釐清肇事責任的重要依據，筆錄中的每一個字都可能影響最終的判斷。本章將引導你如何在警詢過程中冷靜應對、有效陳述，避免因一時口誤或不諳法律而損害自身權益，並提供筆錄後的後續流程指引。</p>
+                <div id="statement-handling-accordion-container" class="space-y-4">
+                    <!-- Statement handling accordion items will be generated by JS -->
+                </div>
+            </section>
+
+            <!-- 權益與文件處理區塊 -->
+            <section id="權益與文件處理" class="p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6 brand">第三部分：權益與文件處理綜合指南</h2>
+                <p class="text-medium-gray mb-8">事故現場的應對為後續處理奠定了基礎，而後續的法律程序與理賠，則高度依賴於官方文件的取得與解讀。這些文件不僅是還原事故真相的依據，也是當事人主張自身權益的籌碼。</p>
+                <div id="rights-and-docs-accordion-container" class="space-y-4">
+                    <!-- Rights and documents accordion items will be generated by JS -->
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 text-gray-400 text-sm">
+            <p>本指南僅供參考，實際情況請依專業人士及法律規定為準。</p>
+        </footer>
+    </div>
+
+    <script>
+        // Helper function for smooth scrolling
+        function scrollToSection(id) {
+            const targetElement = document.getElementById(id);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // --- Accordion Animation Functions ---
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function openPanel(item){
+            const btn = item.querySelector('.acc-header');
+            const panel = item.querySelector('.acc-panel');
+            item.dataset.open = 'true';
+            btn.setAttribute('aria-expanded','true');
+            panel.hidden = false;
+
+            if(!prefersReduced){
+                panel.style.blockSize = 'auto';
+                const h = panel.scrollHeight;
+                panel.style.blockSize = '0px';
+                panel.offsetHeight; // reflow
+                panel.style.transition = 'block-size .28s ease';
+                panel.style.blockSize = h+'px';
+                panel.addEventListener('transitionend', function done(){
+                    panel.style.transition = '';
+                    panel.style.blockSize = 'auto';
+                    panel.removeEventListener('transitionend', done);
+                });
+            } else {
+                panel.style.blockSize = 'auto';
+            }
+        }
+
+        function closePanel(item){
+            const btn = item.querySelector('.acc-header');
+            const panel = item.querySelector('.acc-panel');
+            item.dataset.open = 'false';
+            btn.setAttribute('aria-expanded','false');
+
+            if(!prefersReduced){
+                panel.style.transition = 'block-size .24s ease';
+                panel.style.blockSize = panel.scrollHeight+'px';
+                panel.offsetHeight; // reflow
+                panel.style.blockSize = '0px';
+                panel.addEventListener('transitionend', function done(){
+                    panel.hidden = true;
+                    panel.style.transition = '';
+                    panel.removeEventListener('transitionend', done);
+                });
+            } else {
+                panel.style.blockSize = '0px';
+                panel.hidden = true;
+            }
+        }
+        // --- End Accordion Animation Functions ---
+
+
+        // --- Data for Police Q&A (Moved before statementHandlingDataMain) ---
+        const policeQaData = [
+            { q: "Q1: 您目前意識是否清楚？當時肇事時間、地點？", goal: "確認基本事實，是後續調閱證據的基礎。", points: ["仔細核對警方記錄的時間與地點是否精確。", "若不確定，應誠實告知，避免提供錯誤資訊。"], trap: "時間或地點的微小錯誤，可能導致調不到關鍵的監視器畫面。" },
+            { q: "Q2: 請詳述肇事經過、行向、行駛車道？", goal: "建立客觀的事故發生輪廓。", points: ["用中性、客觀的語氣描述，如「我沿著內側車道直行」。", "清楚說明自己與對方的行駛方向與車道。"], trap: "使用「我猜」、「我覺得」等主觀詞語，會被視為自白，影響責任判斷。" },
+            { q: "Q3: 肇事路段速限？您的行車時速？", goal: "確認是否有超速或未依規定行駛的情形。", points: ["誠實回答；若無法準確回覆，可說明約略範圍或「依速限行駛」。", "避免憑印象報數字，以免與紀錄器證據相衝突。"], trap: "謊報時速與證據不符會損害可信度。" },
+            { q: "Q4: 是否有注意前方、左右車況與路口號誌？", goal: "釐清注意義務是否盡到。", points: ["可強調有正常注意，但遭突發狀況干擾。", "若視線受遮蔽應據實說明。"], trap: "表示「沒注意到」容易被認定疏失。" },
+            { q: "Q5: 當時是否有煞車、閃避或按喇叭？", goal: "了解緊急應變與回避行為。", points: ["若有立即煞車、打方向燈等動作，務必說明。", "強調即時反應，有助降低責任比例。"], trap: "未提及任何反應，會被認定未盡注意義務。" },
+            { q: "Q6: 事故後是否有下車查看對方傷勢？", goal: "確認是否有協助義務與肇逃嫌疑。", points: ["若有協助，描述當時動作與對話。", "如有報警或聯絡救護也應說明。"], trap: "未處理即離開現場，可能構成肇事逃逸。" },
+            { q: "Q7: 是否有飲酒、用藥、身體不適？", goal: "排除駕駛行為受影響。", points: ["無則明確表示「無飲酒、無用藥、身體狀況良好」。", "若服藥但不影響駕駛，也應如實告知藥品種類。"], trap: "隱匿用藥或不適會影響肇責認定。" },
+            { q: "Q8: 是否與對方發生口角或肢體衝突？", goal: "掌握現場衝突狀況，預防刑責。", points: ["無爭執則明確指出。", "若有，說明緣由並保持中性。"], trap: "情緒化用詞可能被反指。" },
+            { q: "Q9: 當時天候與路面狀況為何？", goal: "了解環境對事故影響。", points: ["有雨霧積水應說明，可降低過失程度。", "說明視線遮蔽或路面濕滑等客觀因素。"], trap: "忽略環境因素可能被全歸責於駕駛疏失。" },
+            { q: "Q10: 對方車輛當時動態為何？", goal: "確認雙方互動、釐清責任。", points: ["若對方違規或突發舉動，具體說明。", "不確定則說「無法判斷」。"], trap: "臆測對方動作會成為陳述漏洞。" },
+            { q: "Q11: 現場是否有監視器或行車記錄器？", goal: "確認客觀影像佐證。", points: ["主動告知紀錄器有無與保存狀態。", "提醒警方調閱特定方向或商家監視器。"], trap: "不主動提供錄影資訊，可能錯失有利證據。" },
+            { q: "Q12: 是否有乘客或目擊證人？", goal: "補強證詞一致性與還原事實。", points: ["如有，提供聯絡方式與觀察位置。", "強調證詞可協助釐清責任。"], trap: "隱瞞或刻意挑選證人恐引發疑慮。" },
+            { q: "Q13: 對方是否有逃逸或拒絕處理？", goal: "紀錄對方行為利於法律程序。", points: ["若有，說明對方反應與去向。", "請警方確認對方身份與保險資料。"], trap: "未即時提出，事後難查證。" },
+            { q: "Q14: 傷害係告訴乃論...您是否瞭解？", goal: "依法告知您的法律權利。", points: ["回答「瞭解」。", "務必記住，若有受傷，可在「知悉犯人時起」6個月內提出過失傷害告訴。", "告知員警目前意向，例如「我會保留法律追訴權」。"], trap: "誤以為「保留法律追訴權」有法律效力，或錯過6個月告訴期，將喪失透過刑事程序向對方施壓以利和解的籌碼。" },
+            { q: "Q15: 現場（草）圖是否正確？", goal: "確認您對警方繪製的事故現場圖沒有異議。", points: ["仔細核對圖上的車輛位置、行向、標線、撞擊點是否與事實相符。", "有任何不符之處，應立即向警方反應並要求更正。"], trap: "草圖是初判表和鑑定的重要依據，一旦簽名確認，錯誤的現場圖將對您極為不利。" },
+            { q: "Q16: 以上所言是否實在？有無補充？", goal: "給您最後確認及補充說明的機會。", points: ["再次快速瀏覽全部筆錄內容。", "若有任何遺漏或想強調的事，可在此時補充，例如「我想補充，對方的車速非常快」。"], trap: "輕率地回答「沒有」並簽名，等於放棄了最後補救筆錄內容的機會。" }
+        ];
+
+        const sceneHandlingData = [
+            {
+                title: '一、<span class="text-red-600 text-2xl font-extrabold">放</span> — 放置警告標誌',
+                icon: 'fa-triangle-exclamation text-orange-500', // Changed to orange color
+                content: `
+                    <p class="mb-4">事故地點後方 5~100 公尺擺放三角警示牌或其他明顯警告設施。</p>
+                    <ul class="list-disc list-inside space-y-3 text-medium-gray">
+                        <li>開啟車輛雙黃閃光燈。</li>
+                        <li>依《道路交通事故處理辦法》第 3 條，在事故車輛後方適當距離放置車輛故障標誌 5~100 公尺。</li>
+                        <li>
+                            <strong>什麼叫做「適當距離」？</strong>
+                            <ul class="list-decimal list-inside ml-6 mt-2 space-y-1 text-sm">
+                                <li>高速公路：於事故地點後方100公尺處。</li>
+                                <li>快速道路或最高速限超過60公里之路段：於事故地點後方80公尺處。</li>
+                                <li>最高速限超過50公里至60公里之路段：於事故地點後方50公尺處。</li>
+                                <li>最高速限50公里以下之路段：於事故地點後方30公尺處。</li>
+                                <li>交通壅塞或行車時速低於10公里以下之路段：於事故地點後方5公尺處。</li>
+                            </ul>
+                        </li>
+                        <li><strong>速限對照記憶法：：</strong>速限數字=警告標誌距離（例如速限50公里→車後50公尺;速限100公里→車後 100公尺）。</li>
+                        <li><strong>距離估算：：</strong>可利用車道線計算，每段車道線(白實線4公尺+白虛線6公尺)=10公尺，例：50公尺=5 段車道線。</li>
+                    </ul>
+                `
+            },
+            {
+                title: '二、<span class="text-red-600 text-2xl font-extrabold">撥</span> — 撥打報警與救援電話',
+                icon: 'fa-phone-volume text-blue-500', // Changed to blue color
+                content: `
+                    <h4 class="font-bold text-lg mb-2 brand">電話與用途</h4>
+                    <ul class="list-disc list-inside space-y-3 text-medium-gray">
+                        <li><strong>110：報警</strong> → 建議當事人親自報案，屬「自首行為」，如涉刑責可依法減刑。
+                            <p class="text-sm ml-6 mt-1"><strong>報案須提供資訊：：</strong>報案人姓名、事故地點、時間、涉事車號、車種、傷亡情況。</p>
+                        </li>
+                        <li><strong>119：救護</strong></li>
+                        <li><strong>112：緊急求救</strong>（手機無 SIM 卡、鎖定、無網路仍可撥打）</li>
+                        <li><strong>富邦產險：0800-009888</strong></li>
+                    </ul>
+                `
+            },
+            {
+                title: '三、<span class="text-red-600 text-2xl font-extrabold">劃 (拍)</span>— 劃線定位與拍照',
+                icon: 'fa-camera-retro text-green-500', // Changed to green color
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-green-success">輕微事故（無人傷亡，車輛尚能行駛）</h4>
+                            <p>在完成拍照與標記後，應將車輛移至路邊安全處，避免妨礙交通。在移車前，可使用噴漆、粉筆或尖硬物在地上標出車輛四個輪胎位置及車頭方向。若未依規定處置並造成交通阻塞，駕駛人將面臨新臺幣 600 元以上 1,800 元以下罰鍰。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-red-warning">嚴重事故（有人受傷或死亡）</h4>
+                            <p>此為法律嚴格規範的狀況。應立即採取救護措施，但絕對禁止移動肇事車輛與現場痕跡。若當事人未經同意而任意移動車輛，可能破壞重要證據，依法可處新臺幣 3,000 元以上 9,000 元以下罰鍰。</p>
+                        </div>
+                    </div>
+                    <hr class="my-6">
+                    <h4 class="font-bold text-lg mb-4 brand">拍照處理注意事項</h4>
+                    <ol class="list-decimal list-inside space-y-4 text-medium-gray">
+                        <li><strong>全程確保安全：：</strong>拍攝與移車時，務必先確認自身及乘客安全，避免站在車道中間或有來車方向。可請乘客或其他駕駛協助警示，防止二次事故發生。</li>
+                        <li><strong>放置警告標誌：：</strong>在事故車輛後方適當距離（一般道路約 30–50 公尺，高速公路約 100 公尺以上）放置故障標誌。標誌須朝向來車方向，提醒後方車輛減速避讓。</li>
+                        <li><strong>拍攝全景：：</strong>以標線為基準，確保照片中可清楚看見路面標線。從前、後方向各拍一張，將事故車輛與周邊設施（如交通號誌、路牌、電線桿、護欄等）一併納入畫面。拍攝時應涵蓋現場車輛、路面痕跡、散落物等。</li>
+                        <li><strong>多角度細部拍攝：：</strong>從前、後、左、右四個方向分別拍攝事故車輛全景。
+                            <p class="font-semibold mt-2 ml-4">特寫拍攝：</p>
+                            <ul class="list-disc list-inside ml-8 text-sm">
+                                <li>撞擊點與碰撞部位</li>
+                                <li>車損細節（鈑金凹陷、擋泥板、底盤損傷等）</li>
+                                <li>路面煞車痕、輪胎痕跡</li>
+                                <li>掉落物或散落物位置</li>
+                            </ul>
+                        </li>
+                        <li><strong>保留證據與後續處理：：</strong>妥善保存照片或影片，以便日後釐清責任與保險理賠。若有人員傷亡或財損重大，應立即報警並索取《道路交通事故當事人登記聯單》。儘快通知保險公司，並依其指示進行理賠程序。</li>
+                    </ol>
+                `
+            },
+            {
+                title: '四、<span class="text-red-600 text-2xl font-extrabold">移</span> — 移開車輛',
+                icon: 'fa-car-side text-purple-500', // Changed to purple color
+                content: `
+                    <div class="space-y-4 mb-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-green-success">無人傷亡且車輛可行駛</h4>
+                            <p>標繪定位後，立即移至路邊不妨礙交通之處。若不移車致阻礙交通，警方可依《道路交通管理處罰條例》第62條第2項舉發。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-red-warning">有人傷亡事故</h4>
+                            <p>因屬刑案，須保持現場完整，待救護人員處理後再標繪。若雙方同意，可標繪後移車；任一方不同意，不得移動跡證。</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg border border-gray-300">
+                        <h4 class="font-bold text-lg mb-2 brand" style="font-size: 1.25rem;">拖吊資訊：</h4>
+                        <p class="text-medium-gray text-lg mb-1"><strong>富邦道路救援:</strong></p>
+                        <p class="text-medium-gray text-base ml-4">網址: <a href="https://b2c.518fb.com/FubonEC/benefit_traffic_step1.jsp" target="_blank" class="text-blue-600 hover:underline">https://b2c.518fb.com/FubonEC/benefit_traffic_step1.jsp</a></p>
+                        <p class="text-medium-gray text-base ml-4">電話: 0800-000911</p>
+                    </div>
+                `
+            },
+            {
+                title: '五、<span class="text-red-600 text-2xl font-extrabold">等</span> — 平心靜氣等候警方',
+                icon: 'fa-user-tie text-red-500', // Changed to red color
+                content: `
+                    <ul class="list-disc list-inside space-y-3 text-medium-gray">
+                        <li>保持冷靜，避免爭吵或肢體衝突。</li>
+                        <li>夜間或偏僻地點，可緊閉車窗報警等候，防範假車禍搶劫。</li>
+                        <li>等候期間可先拍照存證，尋找目擊證人。</li>
+                        <li>即便雙方已和解，不報警也應自行拍照留存證據。</li>
+                        <li>駕駛逃逸或沒協助傷者就醫,可能涉及肇逃、遺棄罪。</li>
+                    </ul>
+                `
+            }
+        ];
+
+        const rightsAndDocsData = [
+            {
+                title: '一、關鍵文書與證據保全—釐清肇事責任的基石', // 章節編號調整
+                icon: 'fa-file-alt text-orange-500', // 改為橘色
+                content: `
+                    <h4 class="font-bold text-lg mb-2 brand">1.1 警勤單位文件深度解析</h4>
+                    <ul class="list-disc list-inside space-y-4 text-medium-gray mb-6">
+                        <li><strong>當事人登記聯單</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>用途</strong>：此聯單是證明當事人確曾發生道路交通事故的官方文件。其主要用途是作為申請後續文件及保險理賠的出險依據。</li>
+                                <li><strong>限制</strong>：聯單內容僅供紀錄，不作為肇事鑑定、財損估計或責任歸屬的完全依據。</li>
+                                <li><strong>取得方式</strong>：聯單由現場處理員警提供，當事人應在警方離開前向其索取。</li>
+                            </ul>
+                        </li>
+                        <li><strong>現場圖、現場照片</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>用途與時程</strong>：現場圖與照片是還原事故現場最直接、最客觀的證據。當事人可在事故發生<strong>七日後</strong>，向處理單位申請閱覽或提供。</li>
+                                <li><strong>注意事項</strong>：申請後應仔細核對，若發現與現場情況不符，應立即向警方提出。若在案件結案後申請，收到的文件可能會包含交通警察大隊審核後的註解或更正。。</li>
+                            </ul>
+                        </li>
+                        <li><strong>初步分析研判表（初判表）</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>法律效力</strong>：初判表由警方根據現場資料初步判斷的肇事原因與違規事實。儘管其是保險理賠與和解談判的重要參考，但<strong>不具備法律終局效力</strong>，無法直接作為法院判決的依據。</li>
+                                <li><strong>申請時程</strong>：當事人可在事故發生<strong>三十日後</strong>申請提供。</li>
+                                <li><strong>文件解讀</strong>：初判表通常會列出「A車疑似有...」或「B車無肇事因素」等文字，顯示其非終局判決的性質。然而，其在實務中的影響力不容小覷，許多保險公司會以此作為初步理賠的依據，因此，取得並解讀初判表是車禍處理的關鍵步驟。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-2 brand">1.2 專業鑑定與覆議程序</h4>
+                    <ul class="list-disc list-inside space-y-4 text-medium-gray">
+                        <li><strong>車輛行車事故鑑定委員會</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>申請時機</strong>：當事人可在事故發生<strong>六個月內</strong>，向各縣市政府交通事件裁決處申請鑑定。</li>
+                                <li><strong>流程與費用</strong>：申請時需繳納新臺幣 3000 元規費。鑑定委員會由專業委員組成，其出具的鑑定報告更具專業性與公信力，常被法院採納為判決依據。</li>
+                            </ul>
+                        </li>
+                        <li><strong>覆議機制</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>申請時機</strong>：若當事人對鑑定報告仍有異議，可在收到報告<strong>三十日後</strong>向覆議委員會申請覆議，且<strong>只能申請一次</strong>。</li>
+                                <li><strong>費用</strong>：覆議需繳納新臺幣 2000 元規費。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-4 mt-6 brand">表1-1：車禍相關文件申請時程與用途一覽</h4>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">文件名稱</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">申請時程</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">申請單位</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">法律效力</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">主要用途</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-medium-gray">
+                                <tr><td class="p-3 border border-brand">道路交通事故當事人登記聯單</td><td class="p-3 border border-brand">現場即時提供</td><td class="p-3 border border-brand">現場處理員警</td><td class="p-3 border border-brand">僅供證明事故發生</td><td class="p-3 border border-brand">申請後續文件、保險出險證明</td></tr>
+                                <tr><td class="p-3 border border-brand">現場圖、現場照片</td><td class="p-3 border border-brand">事故發生 7 日後</td><td class="p-3 border border-brand">處理單位（分局交通隊）</td><td class="p-3 border border-brand">實證資料，具備參考效力</td><td class="p-3 border border-brand">還原事故現場、保險理賠佐證</td></tr>
+                                <tr><td class="p-3 border border-brand">道路交通事故初步分析研判表</td><td class="p-3 border border-brand">事故發生 30 日後</td><td class="p-3 border border-brand">處理單位（分局交通隊）</td><td class="p-3 border border-brand">不具法律終局效力，僅供參考</td><td class="p-3 border border-brand">和解談判、保險理賠初步依據</td></tr>
+                                <tr><td class="p-3 border border-brand">車輛行車事故鑑定報告</td><td class="p-3 border border-brand">事故發生 6 個月內可申請</td><td class="p-3 border border-brand">車輛行車事故鑑定委員會</td><td class="p-3 border border-brand">具備專業公信力，法院常採納</td><td class="p-3 border border-brand">釐清肇事責任、訴訟主要依據</td></tr>
+                                <tr><td class="p-3 border border-brand">鑑定覆議報告</td><td class="p-3 border border-brand">收到鑑定報告 30 日後可申請</td><td class="p-3 border border-brand">交通部公路局車輛行車事故鑑定覆議會</td><td class="p-3 border border-brand">具備專業公信力，法院常採納</td><td class="p-3 border border-brand">重新檢視鑑定結果</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                title: '二、公私場域事故處理的法律與實務差異', // 章節編號調整
+                icon: 'fa-map text-blue-600', // 從黃色改為藍色
+                content: `
+                    <p class="mb-4">並非所有車禍都發生在一般道路上，如賣場停車場、大樓地下室、私人土地等。這些場所的事故處理流程與法律適用，與公有道路有著顯著差異，若不了解其中區別，可能導致權益受損。</p>
+                    <h4 class="font-bold text-lg mb-2 brand">2.1 道路交通管理處罰條例的適用範圍：公有道路定義</h4>
+                    <p class="mb-4 text-medium-gray">《道路交通管理處罰條例》中的「道路」是指公路、街道、巷弄、廣場、騎樓、走廊或其他供公眾通行之地方。只有在此範圍內發生的事故，才能適用相關的交通法規與行政罰則。</p>
+                    <h4 class="font-bold text-lg mb-2 brand">2.2 私人土地（如停車場、社區）車禍的特殊性與處理指南</h4>
+                    <p class="mb-4 text-medium-gray">在私人土地（如賣場停車場、大樓地下室等非對外開放的場所）發生車禍，因其不屬於上述法律所定義的「道路」，故不適用《道路交通管理處罰條例》。這意味著：</p>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>報警處理</strong>：仍可撥打 110 報案。警方會到場做簡易處理，但<strong>不會提供「道路交通事故當事人登記聯單」</strong>，只會提供一張證明單。</li>
+                        <li><strong>文件申請</strong>：無法申請初步分析研判表或行車事故鑑定，因為這些文件僅限於道路交通事故。</li>
+                        <li><strong>法律責任</strong>：雖然無關交通法規，但若造成人員受傷，仍可能面臨<strong>刑法上的「過失傷害罪」</strong>追究。若僅為車輛損壞，則屬於民事求償範疇。</li>
+                        <li><strong>保險理賠</strong>：保險公司會根據投保內容進行理賠，但強制險通常不理賠車損部分。因此，在私人場域發生事故，任意險的保障更顯重要。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-4 brand">2.3 公有道路與私人土地車禍處理核心差異比較</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">項目</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">公有道路車禍</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">私人土地車禍</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-medium-gray">
+                                <tr><td class="p-3 border border-brand"><strong>是否提供登記聯單</strong></td><td class="p-3 border border-brand">✓</td><td class="p-3 border border-brand">✗（僅提供證明單）</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>是否可申請初判表</strong></td><td class="p-3 border border-brand">✓</td><td class="p-3 border border-brand">✗</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>是否可申請車禍鑑定</strong></td><td class="p-3 border border-brand">✓</td><td class="p-3 border border-brand">✗</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>警察是否會開罰單</strong></td><td class="p-3 border border-brand">✓</td><td class="p-3 border border-brand">✗</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>肇事逃逸相關罰則</strong></td><td class="p-3 border border-brand">適用刑法與行政罰則</td><td class="p-3 border border-brand">僅適用刑法過失傷害，不適用《道路交通管理處罰條例》</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>法律責任</strong></td><td class="p-3 border border-brand">交通行政罰則、民事、刑事責任皆適用</td><td class="p-3 border border-brand">主要為民事與刑事責任</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>保險理賠</strong></td><td class="p-3 border border-brand">強制險與任意險皆依約理賠</td><td class="p-3 border border-brand">強制險與任意險皆依約理賠，但強制險不賠車損</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                title: '三、從和解到訴訟—多元爭議解決途徑深度解析', // 章節編號調整
+                icon: 'fa-balance-scale text-red-500', // 從綠色改為紅色
+                content: `
+                    <h4 class="font-bold text-lg mb-2 brand">3.1 和解與調解：程序、法律效力與選擇考量</h4>
+                    <ul class="list-disc list-inside space-y-4 text-medium-gray mb-6">
+                        <li><strong>私下和解</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>優勢與風險</strong>：私下和解的優勢在於快速、彈性，但其風險在於法律效力不足。若和解書未經公證，一旦對方事後反悔或不履行賠償，受害方<strong>無法直接聲請強制執行</strong>而必須另行提起民事訴訟。此外，和解內容若不詳盡，可能導致後續爭議。</li>
+                                <li><strong>和解書撰寫要點</strong>：為確保和解書有效性，應包含雙方基本資料、詳細事故經過、明確的賠償項目與金額、給付方式，並務必註明「<strong>雙方均拋棄對對方本件車禍之其餘民事請求</strong>」與「<strong>不追究刑事責任</strong>」等關鍵條款。</li>
+                            </ul>
+                        </li>
+                        <li><strong>調解委員會</strong>
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>申請流程</strong>：當事人可向事故發生地或任一當事人居住地的鄉鎮市區公所調解委員會提出調解申請。</li>
+                                <li><strong>法律效力</strong>：調解成立並經法院核定後，其<strong>調解書與法院確定判決有同一效力</strong>。若對方未履行賠償，當事人可憑此調解書<strong>直接聲請強制執行</strong>，無須再經訴訟程序。</li>
+                                <li><strong>調解要點</strong>：在調解過程中，應保持冷靜，聆聽對方意見，並備齊所有求償證明文件（如初判表、修繕單據、醫療單據等），以提供明確的計算依據，減少爭議。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-4 brand">表3-1：和解、調解、訴訟之法律效力與風險比較</h4>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">項目</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">私下和解</th>
+                                    <th class="p-3 border border-brand">鄉鎮市區調解</th>
+                                    <th class="p-3 border border-brand">法院訴訟</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-medium-gray">
+                                <tr><td class="p-3 border border-brand"><strong>程序</strong></td><td class="p-3 border border-brand">雙方協議</td><td class="p-3 border border-brand">申請後經調解委員會排定日期協商</td><td class="p-3 border border-brand">遞交訴狀、法院開庭審理</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>法律強制力</strong></td><td class="p-3 border border-brand">具備契約效力，不具備強制執行力</td><td class="p-3 border border-brand">經法院核定後，與確定判決具備同一效力</td><td class="p-3 border border-brand">具備法律終局效力，可強制執行</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>費用</strong></td><td class="p-3 border border-brand">無</td><td class="p-3 border border-brand">鑑定費（新臺幣 3000 元）、調解費用</td><td class="p-3 border border-brand">需繳納裁判費、律師費等</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>是否可強制執行</strong></td><td class="p-3 border border-brand">✗（需另提民事訴訟）</td><td class="p-3 border border-brand">✓</td><td class="p-3 border border-brand">✓</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>優勢</strong></td><td class="p-3 border border-brand">快速、彈性</td><td class="p-3 border border-brand">具法律效力、費用較低、程序簡單</td><td class="p-3 border border-brand">最終解決爭議，具備公權力保障</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>風險</strong></td><td class="p-3 border border-brand">法律效力低、可能產生後續爭議</td><td class="p-3 border border-brand">可能無法達成共識、耗時</td><td class="p-3 border border-brand">耗時、費用高、結果難以預測</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2 brand">3.2 刑事與民事訴訟</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>過失傷害罪</strong>：若車禍造成人員受傷，被害人可在事故發生<strong>六個月內</strong>向警局或地檢署提出刑事告訴。此罪為<strong>告訴乃論</strong>，若雙方在和解或調解過程中達成共識，被害人可以撤回告訴。</li>
+                        <li><strong>民事損害賠償</strong>：受害者可向肇事者請求賠償，項目包含醫療費、交通費、車損修繕費、薪資損失及精神慰撫金等。民事訴訟的請求權時效為事故發生後<strong>兩年</strong>。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-2 brand">3.3 律師在車禍處理中的角色與功能</h4>
+                    <p class="mb-4 text-medium-gray">在複雜或重大事故中，尋求專業律師的協助至關重要。律師可提供法律諮詢、協助和解談判、撰寫法律文件、評估訴訟策略，並在偵查與審判過程中為當事人提供保障，避免因不諳法律而做出不利決定。</p>
+                `
+            },
+            {
+                title: '四、駕馭保險理賠流程—強制險與任意險的策略運用', // 章節編號調整
+                icon: 'fa-hand-holding-usd text-yellow-500', // 從無色改為黃色
+                content: `
+                    <h4 class="font-bold text-lg mb-2 brand">4.1 保險公司的角色與通知義務</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>保險公司的定位</strong>：保險公司與當事人之間存在「債權債務關係」。當事人應將其視為理賠流程中的重要合作夥伴，而非事故處理的唯一負責人。保險公司負責評估事故原因、損失範圍與核定理賠金額。</li>
+                        <li><strong>通知的重要性</strong>：事故發生後，當事人有<strong>「通知義務」</strong>。應於保險契約規定的期限內（通常為五日內）通知保險公司，否則可能影響理賠權益。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-2 brand">4.2 強制汽車責任保險（強制險）</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>理賠範圍</strong>：強制險是法律強制投保的保險，其核心目的在於提供車禍受害人基本的保障。其理賠範圍主要為<strong>人身傷亡</strong>，包含醫療費用、失能給付與死亡給付，但<strong>不涵蓋車輛或其他財物損失</strong>。</li>
+                        <li><strong>申請流程與應備文件</strong>：理賠申請通常需在事故發生後五年內提出。應備文件包括理賠申請書、警方處理證明文件、醫療診斷書及收據正本或蓋有「與正本相符」章的影本等。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-2 brand">4.3 任意險（第三人責任險、車體險等）</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>種類與功能</strong>：任意險旨在填補強制險的不足，涵蓋範圍更廣：
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>第三人責任險</strong>：保障被保險人對車禍事故中「第三人」所應負的賠償責任，包含人身傷害與財物損失。當強制險給付金額不足時，可由第三人責任險補足。</li>
+                                <li><strong>車體險</strong>：保障被保險人自身車輛的損失，可依據保險種類（甲、乙、丙式）與預算選擇投保。</li>
+                                <li><strong>超額責任險</strong>：在第三人責任險保額不足時，提供額外保障，尤其適合經常行駛於高價車輛較多區域的駕駛人。</li>
+                                </ul>
+                        </li>
+                        <li><strong>理賠協商與和解</strong>：在和解談判過程中，應讓保險公司的理賠專員參與，或至少在和解前與其確認賠償金額與範疇。這能避免因承諾過高而需自行負擔差額或因和解條件不當而影響理賠權益。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-4 brand">表4-1：強制險與任意險理賠範圍比較</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">險種</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">理賠對象</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">理賠範圍</th>
+                                    <th class="p-3 font-semibold uppercase bg-soft-blue text-medium-gray border border-brand">理賠金額</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-medium-gray">
+                                <tr><td class="p-3 border border-brand"><strong>強制險</strong></td><td class="p-3 border border-brand">對方駕駛、乘客、行人</td><td class="p-3 border border-brand">人身傷亡</td><td class="p-3 border border-brand">每人死亡、失能最高 200 萬元；醫療費用最高 20 萬元</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>任意險</strong></td><td class="p-3 border border-brand"></td><td class="p-3 border border-brand"></td><td class="p-3 border border-brand"></td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>第三人責任險（體傷）</strong></td><td class="p-3 border border-brand">對方駕駛、乘客、行人</td><td class="p-3 border border-brand">人身傷亡（超出強制險部分）</td><td class="p-3 border border-brand">依保單額度而定</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>第三人責任險（財損）</strong></td><td class="p-3 border border-brand">對方車輛及其他財物</td><td class="p-3 border border-brand">財物損失</td><td class="p-3 border border-brand">依保單額度而定</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>超額責任險</strong></td><td class="p-3 border border-brand">對方駕駛、乘客、行人</td><td class="p-3 border border-brand">人身傷亡與財物損失（超出強制險與第三人責任險部分）</td><td class="p-3 border border-brand">依保單額度而定</td></tr>
+                                <tr><td class="p-3 border border-brand"><strong>車體損失險</strong></td><td class="p-3 border border-brand">被保險人自身車輛</td><td class="p-3 border border-brand">自身車輛維修費用</td><td class="p-3 border border-brand">依保單額度而定</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                title: '五、常見車禍處理盲點與法律陷阱警示', // 章節編號調整
+                icon: 'fa-exclamation-triangle text-green-500', // 從紅色改為綠色
+                content: `
+                    <h4 class="font-bold text-lg mb-2 brand">5.1 「無人受傷就不算肇事逃逸」的迷思</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>法律界定</strong>：根據刑法第 185-4 條，**肇事逃逸罪**的成立要件是「致人受傷或死亡而逃逸」。若事故未造成人身傷亡，則不構成此刑事罪名。</li>
+                        <li><strong>行政罰則</strong>：然而，這不代表可以逕自離開現場。若僅造成財物損害（如車損），逃逸仍違反《道路交通管理處罰條例》第 62 條，將處新臺幣 1,000 元以上 3,000 元以下罰鍰，並吊扣駕駛執照。</li>
+                        <li><strong>法律洞察</strong>：刑事上的「肇事逃逸罪」屬於<strong>非告訴乃論</strong>。這意味著一旦被檢察官得知犯罪事實並提起公訴，**即使與被害人達成和解，也無法撤銷告訴**，只能在量刑時作為從輕發落的參考。這點與「過失傷害」罪的告訴乃論性質有根本區別，凸顯了肇事逃逸行為在法律上的嚴重性。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-2 brand">5.2 私下和解的潛在陷阱</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray mb-6">
+                        <li><strong>風險揭示</strong>：
+                            <ul class="list-circle list-inside ml-6 mt-1 space-y-1 text-sm">
+                                <li><strong>口頭承諾無法律強制力</strong>：口頭和解不具備法律強制執行力，對方事後反悔將求償無門。</li>
+                                <li><strong>賠償金額被低估</strong>：許多人在和解時僅考慮有單據的醫療費與修車費，而忽略了**精神慰撫金、工作損失、營業損失**等無單據但可求償的項目，導致賠償金額被低估。</li>
+                                <li><strong>和解書條款不當</strong>：和解書若未明確註明「<strong>本次賠償已包含強制險理賠金額</strong>」，可能導致對方日後向保險公司重複請領強制險理賠金。</li>
+                            </ul>
+                        </li>
+                        <li><strong>應對建議</strong>：私下和解務必簽署書面和解書，內容詳盡。若對賠償金額有疑慮，或擔心對方不履約，應考慮在調解委員會進行調解，以獲得具備法律強制力的調解書。</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mb-2 brand">5.3 忽視時效的後果</h4>
+                    <ul class="list-disc list-inside space-y-2 text-medium-gray">
+                        <li><strong>時效的重要性</strong>：所有法律程序都有嚴格的時效限制。過失傷害罪的刑事告訴期為事故發生後<strong>六個月內</strong>；民事損害賠償的請求權時效為事故發生後<strong>兩年內</strong>。</li>
+                        <li><strong>深度洞察</strong>：時效是法律賦予當事人追訴權利的保障。一旦超過時效，即使擁有再充分的證據，也將失去主張權利的機會。這強調了及時處理與掌握時間節點的重要性，不應因和解拖延或僥倖心理而忽視。</li>
+                    </ul>
+                `
+            }
+        ];
+
+        const statementHandlingDataMain = [ // Main sections for "筆錄應對核心策略"
+            {
+                title: '筆錄前必讀：四大黃金準則',
+                icon: 'fa-gavel',
+                content: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-soft-blue p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-xl mb-2 brand">① 冷靜陳述，只說事實</h3>
+                            <p class="text-gray-700">描述親眼所見，不加油添醋、不猜測。若不確定距離、速度，就說「無法準確估計」。</p>
+                        </div>
+                        <div class="bg-soft-blue p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-xl mb-2 brand">② 避免自責與推測性字眼</h3>
+                            <p class="text-gray-700">絕不說「可能是我太快」、「應該是我的錯」。責任歸屬交由專業判定，切勿主動攬責。</p>
+                        </div>
+                        <div class="bg-soft-blue p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-xl mb-2 brand">③ 主動提供有利證據</h3>
+                            <p class="text-gray-700">主動告知警方自己或對方的行車記錄器、附近監視器、目擊證人，並清楚說明對方違規行為。</p>
+                        </div>
+                        <div class="bg-soft-blue p-6 rounded-lg shadow">
+                            <h3 class="font-bold text-xl mb-2 brand">④ 簽名前務必仔細核對</h3>
+                            <p class="text-gray-700">筆錄是法律文件，簽名後極難修改。內容有誤或遺漏，務必當場請警方更正後再簽名。</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: '警方問題互動指南',
+                icon: 'fa-question-circle',
+                id: 'qa-guide-section', // Unique ID for this section to insert Q&A accordion
+                content: `
+                    <p class="text-medium-gray mb-6">點擊下方問題，查看應對策略與常見陷阱。</p>
+                    <div class="flex justify-end gap-2 mb-4">
+                        <button id="expandAll" class="px-3 py-1 bg-brand text-white text-sm rounded-md hover:bg-opacity-90 transition-colors">全部展開</button>
+                        <button id="collapseAll" class="px-3 py-1 bg-gray-300 text-gray-700 text-sm rounded-md hover:bg-gray-400 transition-colors">全部收合</button>
+                    </div>
+                    <div id="policeQaAccordion" class="card rounded-2xl divide-y">
+                        ${policeQaData.map((qaItem, qaIdx) => `
+                            <section class="acc-item police-qa-item" data-open="false">
+                                <button class="acc-header w-full text-left hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand" aria-controls="qa-${qaIdx + 1}-panel" aria-expanded="false" id="qa-${qaIdx + 1}-btn">
+                                    <span class="acc-title text-base md:text-lg brand">${qaItem.q}</span>
+                                    <i class="fa-solid fa-chevron-down acc-chevron brand"></i>
+                                </button>
+                                <div id="qa-${qaIdx + 1}-panel" class="acc-panel" role="region" aria-labelledby="qa-${qaIdx + 1}-btn" hidden>
+                                    <div class="acc-panel-inner text-zinc-700">
+                                        <p class="mb-2"><strong>💡 警方的目的：</strong>${qaItem.goal}</p>
+                                        <p class="mb-1 font-semibold text-emerald-600">✅ 應對重點：</p>
+                                        <ul class="list-disc list-inside ml-4 mb-3">
+                                            ${qaItem.points.map(p => `<li>${p}</li>`).join('')}
+                                        </ul>
+                                        <p class="font-semibold text-red-600">⚠️ 常見陷阱：</p>
+                                        <p>${qaItem.trap}</p>
+                                    </div>
+                                </div>
+                            </section>
+                        `).join('')}
+                    </div>
+                `
+            },
+            {
+                title: '筆錄後續流程與權益',
+                icon: 'fa-clipboard-check', // 這個圖示將在 renderGeneralAccordionItems 中被賦予彩色
+                content: `
+                    <div class="bg-soft-blue p-6 rounded-lg shadow">
+                        <p class="mb-6 text-center text-gray-700">完成筆錄只是第一步，接下來的流程與您的權益息息相關。請務必留意以下關鍵時間點與文件。</p>
+                        <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-2 text-center">
+                            <div class="flex-1">
+                                <div class="bg-brand text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto text-2xl font-bold">1</div>
+                                <h3 class="font-bold mt-2">當下</h3>
+                                <p class="text-sm text-gray-700">完成筆錄<br>索取當事人登記聯單</p>
+                            </div>
+                            <div class="w-full md:w-16 h-1 md:h-0 md:flex-1 border-t-2 md:border-t-0 md:border-l-2 border-dashed border-brand my-2 md:my-0"></div>
+                            <div class="flex-1">
+                                <div class="bg-brand text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto text-2xl font-bold">30天後</div>
+                                <h3 class="font-bold mt-2">申請初判表</h3>
+                                <p class="text-sm text-gray-700">申請「道路交通事故初步分析研判表」</p>
+                            </div>
+                            <div class="w-full md:w-16 h-1 md:h-0 md:flex-1 border-t-2 md:border-t-0 md:border-l-2 border-dashed border-brand my-2 md:my-0"></div>
+                            <div class="flex-1">
+                                <div class="bg-brand text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto text-2xl font-bold">6個月內</div>
+                                <h3 class="font-bold mt-2">提出告訴</h3>
+                                <p class="text-sm text-gray-700">若有受傷且和解不成，可提出過失傷害告訴</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+        // --- End Data for different sections ---
+
+
+        const sceneHandlingContainer = document.getElementById('scene-handling-accordion-container');
+        const rightsAndDocsContainer = document.getElementById('rights-and-docs-accordion-container');
+        const statementHandlingContainer = document.getElementById('statement-handling-accordion-container');
+
+        // Helper function to render general accordion items (using acc-item structure)
+        function renderGeneralAccordionItems(container, data) {
+            data.forEach((item, idx) => {
+                const id = container.id + '-' + idx;
+                const accordionItem = document.createElement('section');
+                accordionItem.className = 'acc-item bg-white rounded-lg shadow-sm mb-4';
+                accordionItem.dataset.open = 'false';
+
+                let iconClasses = `fas ${item.icon} text-xl w-8`; // Base icon classes. w-8 gives it a fixed width.
+
+                // Apply specific colors for main section icons
+                if (container.id === 'statement-handling-accordion-container' && item.title.includes('筆錄後續流程與權益')) {
+                    iconClasses += ' text-amber-500'; // 黃色
+                } else if (container.id === 'statement-handling-accordion-container' && item.title.includes('筆錄前必讀')) {
+                    iconClasses += ' text-purple-600'; // 紫色
+                } else if (container.id === 'statement-handling-accordion-container' && item.title.includes('警方問題互動指南')) {
+                    iconClasses += ' text-rose-500'; // 粉色
+                } else if (container.id === 'rights-and-docs-accordion-container') { // Apply colors for the "Rights and Documents" section icons
+                    if (item.title.includes('一、關鍵文書與證據保全')) {
+                        iconClasses = 'fas fa-file-alt text-orange-500'; // 橘色
+                    } else if (item.title.includes('二、公私場域事故處理')) {
+                        iconClasses = 'fas fa-map text-blue-600'; // 藍色
+                    } else if (item.title.includes('三、從和解到訴訟')) {
+                        iconClasses = 'fas fa-balance-scale text-red-500'; // 紅色
+                    } else if (item.title.includes('四、駕馭保險理賠流程')) {
+                        iconClasses = 'fas fa-hand-holding-usd text-yellow-500'; // 黃色
+                    } else if (item.title.includes('五、常見車禍處理盲點與法律陷阱警示')) {
+                        iconClasses = 'fas fa-exclamation-triangle text-green-500'; // 綠色
+                    }
+                }
+
+
+                // If this is the "警方問題互動指南" section, embed its special content (Q&A and buttons)
+                if (item.id === 'qa-guide-section') {
+                    accordionItem.innerHTML = `
+                        <button class="acc-header w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand" aria-controls="${id}-panel" aria-expanded="false" id="${id}-btn">
+                            <div class="flex items-center">
+                                <i class="${iconClasses}"></i>
+                                <h3 class="acc-title text-base md:text-xl text-ink">${item.title}</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down acc-chevron brand"></i>
+                        </button>
+                        <div id="${id}-panel" class="acc-panel" role="region" aria-labelledby="${id}-btn" hidden>
+                            <div class="acc-panel-inner text-medium-gray">
+                                <p class="mb-6">點擊下方問題，查看應對策略與常見陷阱。</p>
+                                <div class="flex justify-end gap-2 mb-4">
+                                    <button id="expandAll" class="px-3 py-1 bg-brand text-white text-sm rounded-md hover:bg-opacity-90 transition-colors">全部展開</button>
+                                    <button id="collapseAll" class="px-3 py-1 bg-gray-300 text-gray-700 text-sm rounded-md hover:bg-gray-400 transition-colors">全部收合</button>
+                                </div>
+                                <div id="policeQaAccordion" class="card rounded-2xl divide-y">
+                                    ${policeQaData.map((qaItem, qaIdx) => `
+                                        <section class="acc-item police-qa-item" data-open="false">
+                                            <button class="acc-header w-full text-left hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand" aria-controls="qa-${qaIdx + 1}-panel" aria-expanded="false" id="qa-${qaIdx + 1}-btn">
+                                                <span class="acc-title text-base md:text-lg brand">${qaItem.q}</span>
+                                                <i class="fa-solid fa-chevron-down acc-chevron brand"></i>
+                                            </button>
+                                            <div id="qa-${qaIdx + 1}-panel" class="acc-panel" role="region" aria-labelledby="qa-${qaIdx + 1}-btn" hidden>
+                                                <div class="acc-panel-inner text-zinc-700">
+                                                    <p class="mb-2"><strong>💡 警方的目的：</strong>${qaItem.goal}</p>
+                                                    <p class="mb-1 font-semibold text-emerald-600">✅ 應對重點：</p>
+                                                    <ul class="list-disc list-inside ml-4 mb-3">
+                                                        ${qaItem.points.map(p => `<li>${p}</li>`).join('')}
+                                                    </ul>
+                                                    <p class="font-semibold text-red-600">⚠️ 常見陷阱：</p>
+                                                    <p>${qaItem.trap}</p>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Regular content rendering for other sections
+                    accordionItem.innerHTML = `
+                        <button class="acc-header w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand" aria-controls="${id}-panel" aria-expanded="false" id="${id}-btn">
+                            <div class="flex items-center">
+                                <i class="${iconClasses}"></i>
+                                <h3 class="acc-title text-base md:text-xl text-ink">${item.title}</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down acc-chevron brand"></i>
+                        </button>
+                        <div id="${id}-panel" class="acc-panel" role="region" aria-labelledby="${id}-btn" hidden>
+                            <div class="acc-panel-inner text-medium-gray">
+                                ${item.content}
+                            </div>
+                        </div>
+                    `;
+                }
+                container.appendChild(accordionItem);
+            });
+        }
+
+
+        // Render all main sections
+        renderGeneralAccordionItems(sceneHandlingContainer, sceneHandlingData);
+        renderGeneralAccordionItems(statementHandlingContainer, statementHandlingDataMain);
+        renderGeneralAccordionItems(rightsAndDocsContainer, rightsAndDocsData);
+
+        // --- Content Protection Enhancements ---
+
+        // Function to convert text to SVG and inject it
+        function textToSVG(text, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // Get font styles from body for consistency
+            const bodyStyle = window.getComputedStyle(document.body);
+            const fontFamily = bodyStyle.fontFamily.split(',')[0].trim(); // Get first font
+            const fontSize = parseFloat(window.getComputedStyle(container).fontSize) || 18; // Default to 18px if not found
+            const textColor = window.getComputedStyle(container).color || '#555555'; // Use text-medium-gray color
+
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+
+            // Create a temporary text element to measure its width/height
+            const tempText = document.createElement("span");
+            tempText.style.fontFamily = fontFamily;
+            tempText.style.fontSize = fontSize + 'px';
+            tempText.style.visibility = 'hidden';
+            tempText.style.position = 'absolute';
+            tempText.innerText = text;
+            document.body.appendChild(tempText);
+
+            const textWidth = tempText.offsetWidth;
+            const textHeight = tempText.offsetHeight;
+            document.body.removeChild(tempText);
+
+            // Set a viewBox that roughly matches the text dimensions,
+            // adding some padding and ensuring it scales well.
+            const paddingX = 10;
+            const paddingY = 5;
+            const viewBoxWidth = textWidth + (paddingX * 2);
+            const viewBoxHeight = textHeight + (paddingY * 2);
+
+            svg.setAttribute("viewBox", `0 0 ${viewBoxWidth} ${viewBoxHeight}`);
+            svg.setAttribute("width", "100%"); // Make it responsive
+            svg.setAttribute("height", "auto");
+            svg.setAttribute("role", "img"); // For accessibility
+            svg.setAttribute("aria-label", "Decorative text image: " + text); // Alt text for accessibility
+
+            const textNode = document.createElementNS(svgNS, "text");
+            textNode.setAttribute("x", paddingX);
+            textNode.setAttribute("y", fontSize + paddingY); // Adjust y based on font size
+            textNode.setAttribute("font-family", fontFamily);
+            textNode.setAttribute("font-size", fontSize + "px");
+            textNode.setAttribute("fill", textColor);
+            textNode.textContent = text;
+
+            svg.appendChild(textNode);
+            container.appendChild(svg);
+        }
+
+        // Apply SVG conversion to the introductory paragraph
+        const introText = "無人傷亡且車輛尚能行駛時，可依內政部警政署「現場處理五字訣-放撥劃移等」進行，確保安全、完整紀錄並維護交通暢通。";
+        textToSVG(introText, 'intro-text-svg-container');
+
+
+        // Intercept copy event to add copyright notice
+        document.addEventListener('copy', function(e) {
+            e.preventDefault(); // Prevent default copy action
+
+            const selectedText = window.getSelection().toString();
+            const copyrightNotice = "\n\n--- 本內容受著作權保護，未經授權禁止轉載與複製 ---\n來源：交通事故處理綜合指南 https://your-website-url.com (此為範例網址，請替換為實際網址)\n"; // Customize your notice
+
+            // Set the new clipboard data
+            if (e.clipboardData) {
+                e.clipboardData.setData('text/plain', selectedText + copyrightNotice);
+            } else if (window.clipboardData && window.clipboardData.setData) {
+                // For IE
+                window.clipboardData.setData('Text', selectedText + copyrightNotice);
+            }
+        });
+
+
+        // --- Event Listeners for all Accordions ---
+        // Using event delegation on the main content area for all .acc-header clicks
+        document.querySelector('main').addEventListener('click', (e) => {
+            const btn = e.target.closest('button.acc-header');
+            if (!btn) return;
+
+            const item = btn.closest('.acc-item');
+            const isOpen = item.dataset.open === 'true';
+
+            // Special handling for the main accordions: close others when one opens
+            // This applies to the top-level items only (scene, statement, rights), not nested Q&A
+            const isMainAccordion = item.parentElement.id === 'scene-handling-accordion-container' ||
+                                    item.parentElement.id === 'statement-handling-accordion-container' ||
+                                    item.parentElement.id === 'rights-and-docs-accordion-container';
+
+            // If this is a main accordion AND it's currently closed (meaning we are about to open it)
+            if (isMainAccordion && !isOpen) {
+                // Close all other main accordion items
+                document.querySelectorAll('#scene-handling-accordion-container > .acc-item, #statement-handling-accordion-container > .acc-item, #rights-and-docs-accordion-container > .acc-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.dataset.open === 'true') {
+                        closePanel(otherItem);
+                    }
+                });
+            }
+
+            // Corrected logic: If currently open, close it; otherwise, open it.
+            isOpen ? closePanel(item) : openPanel(item);
+        });
+
+
+        // --- Attach "全部展開 / 全部收合" buttons and Keyboard accessibility listeners ---
+        // This needs to happen AFTER the DOM content is fully rendered, so place it at the end of the script or inside DOMContentLoaded.
+        document.addEventListener('DOMContentLoaded', () => {
+            const policeQaAccordionRoot = document.getElementById('policeQaAccordion');
+            if (policeQaAccordionRoot) {
+                const expandAllBtn = document.getElementById('expandAll');
+                const collapseAllBtn = document.getElementById('collapseAll');
+
+                if (expandAllBtn && collapseAllBtn) {
+                    expandAllBtn.addEventListener('click', () => {
+                        policeQaAccordionRoot.querySelectorAll('.acc-item.police-qa-item').forEach(openPanel);
+                    });
+                    collapseAllBtn.addEventListener('click', () => {
+                        policeQaAccordionRoot.querySelectorAll('.acc-item.police-qa-item').forEach(closePanel);
+                    });
+                }
+
+                // Keyboard accessibility for Q&A section specifically
+                policeQaAccordionRoot.addEventListener('keydown', (e) => {
+                    const headers = [...policeQaAccordionRoot.querySelectorAll('button.acc-header')];
+                    const i = headers.indexOf(document.activeElement);
+                    if (i < 0) return;
+
+                    if (e.key === 'ArrowDown') { e.preventDefault(); headers[Math.min(i + 1, headers.length - 1)].focus(); }
+                    else if (e.key === 'ArrowUp') { e.preventDefault(); headers[Math.max(i - 1, 0)].focus(); }
+                    else if (e.key === 'Home') { e.preventDefault(); headers[0].focus(); }
+                    else if (e.key === 'End') { e.preventDefault(); headers.at(-1).focus(); }
+                    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); headers[i].click(); }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
